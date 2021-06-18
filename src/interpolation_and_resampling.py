@@ -14,12 +14,13 @@ with open('../source_data/raw.csv', 'r', encoding='utf-8-sig') as raw:
     raw.close()
 
 valid_number_list = []
-valid_label_list =[]
+valid_label_list = []
 
 processed_curve_container = {}
 urination_time_container = {}
 q_max_container = {}
 u_total_container = {}
+u_average_container = {}
 
 
 resampling_frequency = 400
@@ -39,7 +40,7 @@ for data in raw_data:
             curve_raw_data_y = curve_raw_data[1]
 
             processed_curve_container[number], urination_time_container[number], \
-                q_max_container[number], u_total_container[number] = \
+                q_max_container[number], u_total_container[number], u_average_container[number] = \
                 curve_handler(curve_raw_data_x, curve_raw_data_y, resampling_frequency)
 
             valid_number_list.append(number)
@@ -73,7 +74,8 @@ with open('../output/info.csv', 'w') as info_datafile:
                 valid_number,
                 urination_time_container[valid_number],
                 q_max_container[valid_number],
-                u_total_container[valid_number]
+                u_total_container[valid_number],
+                u_average_container[valid_number]
         ]
         csv_writer.writerow(info)
     info_datafile.close()

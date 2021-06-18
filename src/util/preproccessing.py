@@ -17,7 +17,9 @@ def curve_handler(raw_x, raw_y, frequency):
     time_interval = (end - start) / float(frequency - 1)
     u_total = u_total_calculus(time_interval, resampling_points_y)
 
-    return normalized_y, end, q_max, u_total
+    u_average = u_total / end
+
+    return normalized_y, end, q_max, u_total, u_average
 
 
 def u_total_calculus(time_interval, y):
